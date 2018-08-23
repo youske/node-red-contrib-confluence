@@ -1,0 +1,32 @@
+{
+  "name": "node-red-contrib-confluence",
+  "version": "0.0.1",
+  "description": "node-red node confluence rest api",
+  "main": "confluence.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youske/node-red-contrib-confluence.git"
+  },
+  "keywords": [
+    "node-red",
+    "confluence"
+  ],
+  "node-red": {
+    "nodes": {
+      "onfluence": "confluence.js"
+    }
+  },
+  "author": "youske miyakoshi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/youske/node-red-contrib-confluence/issues"
+  },
+  "homepage": "https://github.com/youske/node-red-contrib-confluence#readme",
+  "dependencies": {
+    "qs": "^6.5.2",
+    "request": "^2.88.0"
+  }
+}

@@ -1,0 +1,101 @@
+
+
+<script type="text/x-red" data-template-name="confluence">
+  <div class="form-row">
+    <label for="node-config-input-name"><i class="fa fa-bookmark"></i> Name</label>
+    <input type="text" id="node-config-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row input-url-row">
+    <label for="node-config-input-url"><i class="fa fa-globe"></i> URL</label>
+    <input type="text" id="node-config-input-url">
+  </div>
+  <div class="form-row input-user-row">
+    <label for="node-config-input-user"><i class="fa fa-bookmark"></i> User</label>
+    <input type="text" id="node-config-input-user" />
+  </div>
+  <div class="form-row input-password-row">
+    <label for="node-config-input-password"><i class="fa fa-lock"></i> Password</label>
+    <input type="password" id="node-config-input-password">
+  </div>
+</script>
+
+<script type="text/javascript">
+  RED.nodes.registerType('confluence', {
+    category: 'config',
+    color: "#48ace4",
+    defaults: {
+      name: { value: '', required: true }
+    },
+    credentials: {
+      url: { type: 'text', required: true },        
+      user: { type: 'text', required: true },
+      password: { type: 'password', required: true }
+    },
+    label: function() {
+      return this.name
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="confluence out">
+  <div class="form-row">
+    <label for="node-input-confluence"><i class="fa fa-user"></i> Set API Key</label>
+    <input type="text" id="node-input-confluence">
+  </div>
+  <div class="form-row">
+    <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+    <select type="text" id="node-input-operation">
+      <option value="read">read</option>
+      <option value="write">write</option>
+      <option value="delete">delete</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="node-input-page"><i class="fa fa-tag"></i> Title or Id</label>
+    <input type="text" id="node-input-page">
+  </div>
+  <div class="form-row">
+    <label for="node-input-space"><i class="fa fa-tag"></i> Space</label>
+    <input type="text" id="node-input-space" placeholder="Space">
+  </div>  
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="confluence out">
+  <p>confluenceのページ操作</p>
+　  <p>
+    Title or Id: コンテンツの特定をtitleで行うかcontentIdで行う
+    operation: 
+      <li>read: ページの読み込み</li>
+      <li>write: ページの新規更新 idが空の時にページを作成する</li>
+      削除: idで示されるページを削除
+    <p>
+　<p>
+</script>
+
+<script type="text/javascript">
+  RED.nodes.registerType('confluence out', {
+    category: 'storage-output',
+    color: "#fff",
+    defaults: {
+      confluence: { type: 'confluence', required: true },
+      operation: { value: 'read' },
+      space: { value: '' },      
+      page: { value: '' },
+      name: { value: '' }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'confluence.png',
+    label: function () {
+      var confluenceNode = RED.nodes.node(this.confluence);
+      return this.name || 'confluence';
+    },
+    labelStyle: function () {
+      return this.name ? 'node_label_italic' : '';
+    }
+  });
+</script>
